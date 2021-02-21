@@ -15,7 +15,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _loginController = TextEditingController();
   final _senhaController = TextEditingController();
-  RepositoryShared repositoryShared;
+  // RepositoryShared repositoryShared = new RepositoryShared();
   String username, password;
 
   bool _ocultarSenha = true;
@@ -57,6 +57,10 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: EdgeInsets.only(top: 100.0, bottom: 10),
                   child: TextField(
+                    onChanged:(String value){
+                      username = value;
+                      print(this.username);
+                  },
                     controller: _loginController,
                     decoration: InputDecoration(
                       labelText: "Login:",
@@ -76,6 +80,10 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 TextField(
+                  onChanged:(String value){
+                    password = value;
+                    print(this.password);
+                  },
                   controller: _senhaController,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -118,18 +126,23 @@ class _LoginState extends State<Login> {
                           textColor: Colors.deepPurple,
                           onPressed: ()async {
                             if(_loginController.text.isEmpty || _senhaController.text.isEmpty){
-                              print('ta vazio viado');
+                              print('ta vazio');
                             }else{
+                              // await repositoryShared.getHttp();
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Home()));
+                            // print(await RepositoryShared.verificar_login(this.username, this.password));
+                              if(await RepositoryShared.verificar_login(this.username, this.password)){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()));
+                              }
+                              else{
+                                print('algo deu errado<TENTE NOVAMENTE>');
+                              //
+                              }
 
-                            print(await repositoryShared.verificar_login(this._loginController.text, this._senhaController.text));
                             }
-
-
 
 
                           },
