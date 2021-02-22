@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pede_comer/shared/Objeto.dart';
+import 'package:pede_comer/shared/models/cliente.dart';
 
 import 'Cadastro_endereco.dart';
-
 
 class Cadastro extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class Cadastro extends StatefulWidget {
 class _CadastroState extends State<Cadastro> {
   bool _ocultarSenha1 = true;
   bool _ocultarSenha2 = true;
+
+  static Cliente cliente = new Cliente();
 
   final TextEditingController _controllerNome = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
@@ -22,15 +26,16 @@ class _CadastroState extends State<Cadastro> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   void _resetCampos() {
+    _controllerNome.text = "";
     _controllerEmail.text = "";
+    _controllerCpf.text = "";
     _controllerTelefone.text = "";
+    _controllerSenha.text = "";
+    _controllerConfSenha.text = "";
     setState(() {
       _formKey = GlobalKey<FormState>();
     });
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +75,7 @@ class _CadastroState extends State<Cadastro> {
                           filled: true,
                         ),
                         style: TextStyle(color: Colors.black54, fontSize: 18.0),
+                        controller: _controllerNome,
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Insira seu nome completo";
@@ -79,6 +85,7 @@ class _CadastroState extends State<Cadastro> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "E-mail:",
                         enabledBorder: OutlineInputBorder(
@@ -105,6 +112,7 @@ class _CadastroState extends State<Cadastro> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     child: TextFormField(
+                      controller: _controllerCpf,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: "Cpf:",
@@ -131,6 +139,7 @@ class _CadastroState extends State<Cadastro> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     child: TextFormField(
+                        controller: _controllerTelefone,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: "Telefone:",
@@ -156,6 +165,7 @@ class _CadastroState extends State<Cadastro> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     child: TextFormField(
+                        controller: _controllerSenha,
                         decoration: InputDecoration(
                           labelText: "Senha:",
                           suffixIcon: IconButton(
@@ -184,7 +194,7 @@ class _CadastroState extends State<Cadastro> {
                           filled: true,
                         ),
                         style: TextStyle(color: Colors.black54, fontSize: 18.0),
-                        obscureText: true,
+                        obscureText: _ocultarSenha1,
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Insira sua senha";
@@ -194,6 +204,7 @@ class _CadastroState extends State<Cadastro> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     child: TextFormField(
+                      controller: _controllerConfSenha,
                       decoration: InputDecoration(
                         labelText: "Confirmar senha:",
                         suffixIcon: IconButton(
@@ -222,7 +233,7 @@ class _CadastroState extends State<Cadastro> {
                         filled: true,
                       ),
                       style: TextStyle(color: Colors.black54, fontSize: 18.0),
-                      obscureText: true,
+                      obscureText: _ocultarSenha2,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Confirme sua senha";
@@ -248,6 +259,13 @@ class _CadastroState extends State<Cadastro> {
                                 elevation: 5.0,
                                 shadowColor: Colors.lightGreen),
                             onPressed: () {
+                              cliente.username = _controllerNome.text;
+                              cliente.email = _controllerEmail.text;
+                              cliente.telefone = _controllerTelefone.text;
+                              cliente.cpf = _controllerCpf.text;
+                              cliente.password = _controllerSenha.text;
+                              clientes.add(cliente);
+
 //                              if (_formKey.currentState.validate()) {
                               print("Salvando");
                               Navigator.push(
@@ -275,7 +293,7 @@ class _CadastroState extends State<Cadastro> {
                                   elevation: 5.0,
                                   shadowColor: Colors.deepPurple),
                               onPressed: () {
-                                print('Limpar');
+                                _resetCampos();
                               },
                             ),
                           ))

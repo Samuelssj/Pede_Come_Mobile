@@ -6,6 +6,8 @@ import 'package:pede_comer/home/Home.dart';
 import 'package:pede_comer/shared/cores.dart';
 import 'package:http/http.dart' as http;
 
+
+
 class Login extends StatefulWidget {
 
   @override
@@ -82,7 +84,6 @@ class _LoginState extends State<Login> {
                 TextField(
                   onChanged:(String value){
                     password = value;
-                    print(this.password);
                   },
                   controller: _senhaController,
                   decoration: InputDecoration(
@@ -126,22 +127,19 @@ class _LoginState extends State<Login> {
                           textColor: Colors.deepPurple,
                           onPressed: ()async {
                             if(_loginController.text.isEmpty || _senhaController.text.isEmpty){
-                              print('ta vazio');
+                              _showDialog('Falha ao realizar o login', 'Um ou mais campos estão em branco');
                             }else{
-                              // await repositoryShared.getHttp();
-
-                            // print(await RepositoryShared.verificar_login(this.username, this.password));
-                              if(await RepositoryShared.verificar_login(this.username, this.password)){
+                              if(await RepositoryShared.verificar_login(_loginController.text, _senhaController.text)){
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Home()));
                               }
                               else{
+                                _showDialog('Usuario e/ou senha incorretos', 'Um ou mais dados informados estão incorretos');
                                 print('algo deu errado<TENTE NOVAMENTE>');
                               //
                               }
-
                             }
 
 
@@ -164,9 +162,6 @@ class _LoginState extends State<Login> {
                           ),
                           textColor: Colors.white,
                           onPressed:()async {
-                            //
-                            // await repositoryShared.verificar_login(this.username, this.password);
-                            //
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -184,6 +179,42 @@ class _LoginState extends State<Login> {
     );
   }
 
+  void _showDialog(String t, String s) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text(t,
+            style: TextStyle(
+                color: Colors.deepPurple,
+                fontWeight: FontWeight.bold,
+                fontSize: 25.0
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: new Text(s, style: TextStyle(
+              color: Colors.black,
+              fontSize: 18.0
+          ),),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            new FlatButton(
+              child: new Text("Fechar", style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0
+              ),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
 
 //   @override
 //   HomePageState createState() {
@@ -523,4 +554,3 @@ class _LoginState extends State<Login> {
 //       ),
 //     );
 //   }
-}

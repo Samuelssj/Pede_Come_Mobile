@@ -28,9 +28,9 @@ class _SplashState extends State<Splash> {
     // this.repositoryShared.verificar_login(); //retornando do servido
     bool flag = await this.repositoryShared.flag;
     if (flag) {
-      Navigator.pushReplacementNamed(context, 'home');
+      Navigator.pushReplacementNamed(context, '/Home');
     } else {
-      Navigator.pushReplacementNamed(context, 'login');
+      Navigator.pushReplacementNamed(context, '/Login');
     }
   }
 

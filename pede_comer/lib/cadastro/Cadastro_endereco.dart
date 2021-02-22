@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pede_comer/app/splash/RepositoryShared.dart';
+import 'package:pede_comer/home/Home.dart';
+import 'package:pede_comer/shared/Objeto.dart';
 
 class Endereco extends StatefulWidget {
   @override
@@ -6,19 +9,25 @@ class Endereco extends StatefulWidget {
 }
 
 class _EnderecoState extends State<Endereco> {
+  String rua, numero, bairro,cidade, estado;
 
-  final TextEditingController _controllerNome = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerCpf = TextEditingController();
   final TextEditingController _controllerTelefone = TextEditingController();
-  final TextEditingController _controllerSenha = TextEditingController();
-  final TextEditingController _controllerConfSenha = TextEditingController();
+  final TextEditingController _controllerRua = TextEditingController();
+  final TextEditingController _controllerNumero = TextEditingController();
+  final TextEditingController _controllerBairro = TextEditingController();
+  final TextEditingController _controllerCidade = TextEditingController();
+  final TextEditingController _controllerEstado = TextEditingController();
+
 
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   void _resetCampos() {
-    _controllerEmail.text = "";
-    _controllerTelefone.text = "";
+    _controllerRua.text = "";
+    _controllerNumero.text = "";
+    _controllerBairro.text = "";
+    _controllerCidade.text = "";
+    _controllerEstado.text = "";
     setState(() {
       _formKey = GlobalKey<FormState>();
     });
@@ -48,14 +57,15 @@ class _EnderecoState extends State<Endereco> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.only(top: 20.0),
                       child: Row(
                         children: <Widget>[
                           Expanded(
                             child: Padding(
                               padding:
-                              EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 5.0),
+                              EdgeInsets.only(left: 20.0, top: 0.0,  right: 0.0, bottom: 20.0),
                               child: TextFormField(
+                                controller: _controllerRua,
                                   decoration: InputDecoration(
                                     labelText: "Rua:",
                                     enabledBorder: UnderlineInputBorder(
@@ -82,8 +92,9 @@ class _EnderecoState extends State<Endereco> {
                           Expanded(
                             child: Padding(
                               padding:
-                              EdgeInsets.fromLTRB(40.0, 0.0, 10.0, 5.0),
+                              EdgeInsets.fromLTRB(40.0, 0.0, 20.0, 20.0),
                               child: TextFormField(
+                                controller: _controllerNumero,
                                 keyboardType: TextInputType.number,
                                 maxLines: 1,
                                 decoration: InputDecoration(
@@ -113,9 +124,10 @@ class _EnderecoState extends State<Endereco> {
                         ],
                       )),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 15.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                     child: TextFormField(
-                        keyboardType: TextInputType.number,
+                      controller: _controllerBairro,
+                        keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                           labelText: "Bairro:",
                           enabledBorder: UnderlineInputBorder(
@@ -138,7 +150,7 @@ class _EnderecoState extends State<Endereco> {
                         }),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 15.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: "Cidade:",
@@ -155,7 +167,7 @@ class _EnderecoState extends State<Endereco> {
                         ),
                       ),
                       style: TextStyle(color: Colors.deepPurple, fontSize: 18.0),
-                      controller: _controllerEmail,
+                      controller: _controllerCidade,
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Insira a cidade";
@@ -164,8 +176,9 @@ class _EnderecoState extends State<Endereco> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                     child: TextFormField(
+                      controller: _controllerEstado,
                         decoration: InputDecoration(
                           labelText: "Estado:",
                           enabledBorder: UnderlineInputBorder(
@@ -181,7 +194,7 @@ class _EnderecoState extends State<Endereco> {
                           ),
                         ),
                         style: TextStyle(color: Colors.deepPurple, fontSize: 18.0),
-                        obscureText: true,
+                        obscureText: false,
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Insira sua senha";
@@ -189,7 +202,7 @@ class _EnderecoState extends State<Endereco> {
                         }),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 10.0),
+                    padding: EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 15.0),
                   ),
                   Row(
                     children: <Widget>[
@@ -227,9 +240,26 @@ class _EnderecoState extends State<Endereco> {
                                   fontSize: 18.0, fontWeight: FontWeight.bold),
                             ),
                             textColor: Colors.white,
-                            onPressed: () {
+                            onPressed: ()async  {
                               if (_formKey.currentState.validate()) {
-                                print("Salvando");
+                                rua = _controllerRua.text;
+                                numero = _controllerNumero.text;
+                                bairro = _controllerBairro.text;
+                                cidade = _controllerCidade.text;
+                                estado = _controllerEstado.text;
+                                if(await RepositoryShared.created_cliente(clientes[0].username, clientes[0].password,
+                                    clientes[0].email, clientes[0].telefone, clientes[0].cpf, this.rua, this.numero,
+                                    this.bairro, this.cidade, this.estado) ){
+                                  clientes.removeAt(0);
+                                  Navigator.pushReplacementNamed(
+                                      context,
+                                      '/Home');
+
+                                }
+                                else{
+                                  print('algo deu errado<TENTE NOVAMENTE>');
+                                  //
+                                }
                               }
                             },
                           ),
@@ -266,7 +296,9 @@ class _EnderecoState extends State<Endereco> {
                                     fontSize: 18.0, fontWeight: FontWeight.bold),
                               ),
                               textColor: Colors.white,
-                              onPressed: () {},
+                              onPressed: () {
+                                _resetCampos();
+                              },
                             ),
                           ))
                     ],

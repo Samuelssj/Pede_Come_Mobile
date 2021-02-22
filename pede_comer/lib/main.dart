@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pede_comer/cadastro/Cadastro.dart';
+import 'package:pede_comer/cadastro/Cadastro_endereco.dart';
 import 'package:pede_comer/login/Login.dart';
 import 'app/splash/Splash.dart';
 import 'home/Home.dart';
@@ -9,16 +11,9 @@ void main() {
    );
 }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    Map<String, WidgetBuilder> rotas ={
-     'home': (_)=>Home(),
-     'login': (_)=>Login(),
-      'inicio':(_)=>InicioScreen()
-    };
 
     return MaterialApp(
       theme: ThemeData(
@@ -28,9 +23,13 @@ class MyApp extends StatelessWidget {
       // ),
     ),
       debugShowCheckedModeBanner: false,
-      routes: rotas,
-      home: Splash()
-
+      home: Splash(),
+      routes: {
+        '/Home': (_)=>Home(),
+        '/Login': (_)=>Login(),
+        '/Cadastrar':(_)=>Cadastro(),
+        '/Cadastrar_endereco':(_)=>Endereco(),
+      },
 
     );
   }
