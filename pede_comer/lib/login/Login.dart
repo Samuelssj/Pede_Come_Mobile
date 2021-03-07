@@ -4,6 +4,8 @@ import 'package:pede_comer/app/splash/RepositoryShared.dart';
 import 'package:pede_comer/cadastro/Cadastro.dart';
 import 'package:pede_comer/home/Home.dart';
 import 'package:pede_comer/shared/cores.dart';
+import 'package:get/get.dart';
+
 import 'package:http/http.dart' as http;
 
 
@@ -162,9 +164,11 @@ class _LoginState extends State<Login> {
                           ),
                           textColor: Colors.white,
                           onPressed:()async {
+                            // Get.snackbar("Titulo de cadastro", "cadastrandoo mensagem");  mensagem na barra
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
+
                                     builder: (context) => Cadastro()));
                           },
                         ),

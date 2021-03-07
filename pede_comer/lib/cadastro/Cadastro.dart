@@ -259,6 +259,7 @@ class _CadastroState extends State<Cadastro> {
                                 elevation: 5.0,
                                 shadowColor: Colors.lightGreen),
                             onPressed: () {
+                              if (_formKey.currentState.validate()) {
                               cliente.username = _controllerNome.text;
                               cliente.email = _controllerEmail.text;
                               cliente.telefone = _controllerTelefone.text;
@@ -266,13 +267,13 @@ class _CadastroState extends State<Cadastro> {
                               cliente.password = _controllerSenha.text;
                               clientes.add(cliente);
 
-//                              if (_formKey.currentState.validate()) {
+
                               print("Salvando");
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Endereco()));
-//                              }
+                              }
                             },
                           ),
                         ),

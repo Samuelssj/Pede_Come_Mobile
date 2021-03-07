@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:pede_comer/cadastro/Cadastro.dart';
 import 'package:pede_comer/cadastro/Cadastro_endereco.dart';
 import 'package:pede_comer/login/Login.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
           hintColor: Colors.white,
           primarySwatch: Colors.deepPurple,
@@ -34,4 +35,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 

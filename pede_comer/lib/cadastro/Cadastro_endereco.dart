@@ -4,12 +4,15 @@ import 'package:pede_comer/home/Home.dart';
 import 'package:pede_comer/shared/Objeto.dart';
 
 class Endereco extends StatefulWidget {
+
+
   @override
   _EnderecoState createState() => _EnderecoState();
 }
 
 class _EnderecoState extends State<Endereco> {
   String rua, numero, bairro,cidade, estado;
+
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerTelefone = TextEditingController();
