@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pede_comer/app/splash/RepositoryShared.dart';
+import 'file:///C:/Users/Samuel/AndroidStudioProjects/pede_comer/lib/app/splash/data/data/RepositoryShared.dart';
 import 'package:pede_comer/home/Home.dart';
 import 'package:pede_comer/shared/Objeto.dart';
 

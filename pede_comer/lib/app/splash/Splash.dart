@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pede_comer/app/splash/RepositoryShared.dart';
+import 'file:///C:/Users/Samuel/AndroidStudioProjects/pede_comer/lib/app/splash/data/data/RepositoryShared.dart';
 import 'package:pede_comer/shared/cores.dart';
 
 class Splash extends StatefulWidget {
@@ -39,7 +39,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       backgroundColor: Colors.deepPurple,
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(top: 200.0, left: 62.0),
+        padding: EdgeInsets.only(top: 200.0, left: 35.0),
         child: Column(
           children: <Widget>[
             Stack(

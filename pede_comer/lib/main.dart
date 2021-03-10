@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pede_comer/cadastro/Cadastro.dart';
 import 'package:pede_comer/cadastro/Cadastro_endereco.dart';
 import 'package:pede_comer/login/Login.dart';
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           hintColor: Colors.white,
           primarySwatch: Colors.deepPurple,
-          primaryColor: Colors.white
+          primaryColor: Colors.white,
+          textTheme: GoogleFonts.cantarellTextTheme(
+            Theme.of(context).textTheme,
+          ),
+
       // ),
     ),
       debugShowCheckedModeBanner: false,
