@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Samuel/AndroidStudioProjects/pede_comer/lib/app/splash/data/data/RepositoryShared.dart';
+import 'package:pede_comer/app/splash/RepositoryShared.dart';
+
 import 'package:pede_comer/home/Home.dart';
 import 'package:pede_comer/shared/Objeto.dart';
 
 class Endereco extends StatefulWidget {
-
-
   @override
   _EnderecoState createState() => _EnderecoState();
 }
 
 class _EnderecoState extends State<Endereco> {
-  String rua, numero, bairro,cidade, estado;
-
+  String rua, numero, bairro, cidade, estado;
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerTelefone = TextEditingController();
@@ -21,7 +19,6 @@ class _EnderecoState extends State<Endereco> {
   final TextEditingController _controllerBairro = TextEditingController();
   final TextEditingController _controllerCidade = TextEditingController();
   final TextEditingController _controllerEstado = TextEditingController();
-
 
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
@@ -65,10 +62,13 @@ class _EnderecoState extends State<Endereco> {
                         children: <Widget>[
                           Expanded(
                             child: Padding(
-                              padding:
-                              EdgeInsets.only(left: 20.0, top: 0.0,  right: 0.0, bottom: 20.0),
+                              padding: EdgeInsets.only(
+                                  left: 20.0,
+                                  top: 0.0,
+                                  right: 0.0,
+                                  bottom: 20.0),
                               child: TextFormField(
-                                controller: _controllerRua,
+                                  controller: _controllerRua,
                                   decoration: InputDecoration(
                                     labelText: "Rua:",
                                     enabledBorder: UnderlineInputBorder(
@@ -95,7 +95,7 @@ class _EnderecoState extends State<Endereco> {
                           Expanded(
                             child: Padding(
                               padding:
-                              EdgeInsets.fromLTRB(40.0, 0.0, 20.0, 20.0),
+                                  EdgeInsets.fromLTRB(40.0, 0.0, 20.0, 20.0),
                               child: TextFormField(
                                 controller: _controllerNumero,
                                 keyboardType: TextInputType.number,
@@ -104,10 +104,10 @@ class _EnderecoState extends State<Endereco> {
                                   labelText: "Número:",
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                      BorderSide(color: Colors.deepPurple)),
+                                          BorderSide(color: Colors.deepPurple)),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                      BorderSide(color: Colors.deepPurple)),
+                                          BorderSide(color: Colors.deepPurple)),
                                   labelStyle: TextStyle(
                                     color: Colors.deepPurple,
                                     fontSize: 20.0,
@@ -129,23 +129,22 @@ class _EnderecoState extends State<Endereco> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                     child: TextFormField(
-                      controller: _controllerBairro,
+                        controller: _controllerBairro,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                           labelText: "Bairro:",
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.deepPurple)),
+                              borderSide: BorderSide(color: Colors.deepPurple)),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.deepPurple)),
+                              borderSide: BorderSide(color: Colors.deepPurple)),
                           labelStyle: TextStyle(
                             color: Colors.deepPurple,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        style: TextStyle(color: Colors.deepPurple, fontSize: 18.0),
+                        style:
+                            TextStyle(color: Colors.deepPurple, fontSize: 18.0),
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Insira o bairro";
@@ -158,18 +157,17 @@ class _EnderecoState extends State<Endereco> {
                       decoration: InputDecoration(
                         labelText: "Cidade:",
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.deepPurple)),
+                            borderSide: BorderSide(color: Colors.deepPurple)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.deepPurple)),
+                            borderSide: BorderSide(color: Colors.deepPurple)),
                         labelStyle: TextStyle(
                           color: Colors.deepPurple,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      style: TextStyle(color: Colors.deepPurple, fontSize: 18.0),
+                      style:
+                          TextStyle(color: Colors.deepPurple, fontSize: 18.0),
                       controller: _controllerCidade,
                       validator: (value) {
                         if (value.isEmpty) {
@@ -181,22 +179,21 @@ class _EnderecoState extends State<Endereco> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                     child: TextFormField(
-                      controller: _controllerEstado,
+                        controller: _controllerEstado,
                         decoration: InputDecoration(
                           labelText: "Estado:",
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.deepPurple)),
+                              borderSide: BorderSide(color: Colors.deepPurple)),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Colors.deepPurple)),
+                              borderSide: BorderSide(color: Colors.deepPurple)),
                           labelStyle: TextStyle(
                             color: Colors.deepPurple,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        style: TextStyle(color: Colors.deepPurple, fontSize: 18.0),
+                        style:
+                            TextStyle(color: Colors.deepPurple, fontSize: 18.0),
                         obscureText: false,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -243,23 +240,28 @@ class _EnderecoState extends State<Endereco> {
                                   fontSize: 18.0, fontWeight: FontWeight.bold),
                             ),
                             textColor: Colors.white,
-                            onPressed: ()async  {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 rua = _controllerRua.text;
                                 numero = _controllerNumero.text;
                                 bairro = _controllerBairro.text;
                                 cidade = _controllerCidade.text;
                                 estado = _controllerEstado.text;
-                                if(await RepositoryShared.created_cliente(clientes[0].username, clientes[0].password,
-                                    clientes[0].email, clientes[0].telefone, clientes[0].cpf, this.rua, this.numero,
-                                    this.bairro, this.cidade, this.estado) ){
+                                if (await RepositoryShared.created_cliente(
+                                    clientes[0].username,
+                                    clientes[0].password,
+                                    clientes[0].email,
+                                    clientes[0].telefone,
+                                    clientes[0].cpf,
+                                    this.rua,
+                                    this.numero,
+                                    this.bairro,
+                                    this.cidade,
+                                    this.estado)) {
                                   clientes.removeAt(0);
                                   Navigator.pushReplacementNamed(
-                                      context,
-                                      '/Home');
-
-                                }
-                                else{
+                                      context, '/Home');
+                                } else {
                                   print('algo deu errado<TENTE NOVAMENTE>');
                                   //
                                 }
@@ -270,7 +272,7 @@ class _EnderecoState extends State<Endereco> {
                       ),
                       Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 5.0, right: 10.0),
+                        padding: EdgeInsets.only(left: 5.0, right: 10.0),
 //                            child: ElevatedButton(
 //                               child: Text("Limpar Campos",
 //                              style: TextStyle(
@@ -288,22 +290,22 @@ class _EnderecoState extends State<Endereco> {
 //                          },
 //                        ),
 
-                            child: RaisedButton(
-                              elevation: 5.0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              color: Colors.deepPurple,
-                              child: Text(
-                                "Limpar Campos",
-                                style: TextStyle(
-                                    fontSize: 18.0, fontWeight: FontWeight.bold),
-                              ),
-                              textColor: Colors.white,
-                              onPressed: () {
-                                _resetCampos();
-                              },
-                            ),
-                          ))
+                        child: RaisedButton(
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          color: Colors.deepPurple,
+                          child: Text(
+                            "Limpar Campos",
+                            style: TextStyle(
+                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                          ),
+                          textColor: Colors.white,
+                          onPressed: () {
+                            _resetCampos();
+                          },
+                        ),
+                      ))
                     ],
                   )
                 ],

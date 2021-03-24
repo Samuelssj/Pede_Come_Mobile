@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/Samuel/AndroidStudioProjects/pede_comer/lib/app/splash/data/data/RepositoryShared.dart';
+import 'RepositoryShared.dart';
+
 import 'package:pede_comer/shared/cores.dart';
 
 class Splash extends StatefulWidget {
-
   @override
   _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
-
   RepositoryShared repositoryShared;
 
   @override
@@ -20,11 +19,12 @@ class _SplashState extends State<Splash> {
     this.repositoryShared = RepositoryShared();
     this.startSleep();
   }
+
   void startSleep() {
     new Timer(Duration(seconds: 2), navigate);
   }
 
-  void navigate() async{
+  void navigate() async {
     // this.repositoryShared.verificar_login(); //retornando do servido
     bool flag = await this.repositoryShared.flag;
     if (flag) {
@@ -50,30 +50,37 @@ class _SplashState extends State<Splash> {
                   child: Icon(
                     Icons.fastfood,
                     size: 150.0,
-                    color: Colors.black54,),
+                    color: Colors.black54,
+                  ),
                 ),
                 Icon(
                   Icons.fastfood,
                   size: 150.0,
-                  color: Colors.white,)],
+                  color: Colors.white,
+                )
+              ],
             ),
             Padding(padding: EdgeInsets.all(20.0)),
             GestureDetector(
-                child: Text("Pede Comer", style: TextStyle(shadows: <Shadow>[
-                  Shadow(
-                      offset: Offset(2.0, 3.0),
-                      blurRadius: 0.0,
-                      color: Colors.black54)],
-                    color: Colors.white, fontSize: 50, fontWeight: FontWeight.bold),
+                child: Text(
+                  "Pede Comer",
+                  style: TextStyle(
+                      shadows: <Shadow>[
+                        Shadow(
+                            offset: Offset(2.0, 3.0),
+                            blurRadius: 0.0,
+                            color: Colors.black54)
+                      ],
+                      color: Colors.white,
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold),
                 ),
-                onTap:() {
+                onTap: () {
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
                   //         builder: (context) => Login()));
-                }
-            ),
-
+                }),
             Padding(
                 padding: EdgeInsets.only(top: 50.0, bottom: 10),
                 child: Container(
@@ -84,8 +91,7 @@ class _SplashState extends State<Splash> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     strokeWidth: 5.0,
                   ),
-                )
-            ),
+                )),
           ],
         ),
       ),

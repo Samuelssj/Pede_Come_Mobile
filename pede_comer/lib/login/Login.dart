@@ -2,17 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'file:///C:/Users/Samuel/AndroidStudioProjects/pede_comer/lib/app/splash/data/data/RepositoryShared.dart';
+import 'package:pede_comer/app/splash/RepositoryShared.dart';
+
 import 'package:pede_comer/cadastro/Cadastro.dart';
 import 'package:pede_comer/home/Home.dart';
+import 'package:pede_comer/layout.dart';
 import 'package:pede_comer/shared/cores.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class Login extends StatefulWidget {
-
   @override
   _LoginState createState() => _LoginState();
 }
@@ -25,27 +24,27 @@ class _LoginState extends State<Login> {
 
   bool _ocultarSenha = false;
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white ,
-      body: SafeArea(
-        minimum: const EdgeInsets.all(30),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.center, //centralisa
-          children: <Widget>[
-
-            Expanded(
-                flex: 1,
-                child:  Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                Icon(Icons.fastfood, color: Color(0xFF7540EE),size: 35,),
+    return layout.render(
+      content: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.center, //centralisa
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Icon(
+                  Icons.fastfood,
+                  color: Color(0xFF7540EE),
+                  size: 35,
+                ),
                 SizedBox(width: 10),
-                Text("Pede Comer",
+                Text(
+                  "Pede Comer",
                   style: TextStyle(
                     fontSize: 25,
                     fontStyle: FontStyle.italic,
@@ -54,186 +53,184 @@ class _LoginState extends State<Login> {
                 ),
               ],
             ),
-            ),
-
-            Expanded(
-                flex: 6,
-                child: Column(
+          ),
+          Expanded(
+            flex: 6,
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Bem vindo!",
-                    style: TextStyle(
-                      color: Color(0XFF25265E),
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Text(
+                  "Bem vindo!",
+                  style: TextStyle(
+                    color: Color(0XFF25265E),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(height: 20),
-                Text('Descubra restaurantes e mercados perto de você, comida '
-                    'de verdade da sua cidade, onde e quando você quiser !',
-                    style: TextStyle(
-                        color:  Color(0XFF787993),
-                        fontStyle: FontStyle.italic,
-                    ),
+                Text(
+                  'Descubra restaurantes e mercados perto de você, comida '
+                  'de verdade da sua cidade, onde e quando você quiser !',
+                  style: TextStyle(
+                    color: Color(0XFF787993),
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
                 SizedBox(height: 20),
                 TextField(
                   controller: _loginController,
-                  onChanged:(String value){
+                  onChanged: (String value) {
                     username = value;
                     print(this.username);
                   },
                   style: TextStyle(color: Colors.deepPurple, fontSize: 16.0),
-                    decoration: InputDecoration(
-                        hintText: "Email",
-                        hintStyle: TextStyle(
-                            fontSize: 16,
-                          color: Colors.deepPurple,
-                            fontStyle: FontStyle.italic,
-                        ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFDFDFE4),
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF787993),
-                        ),
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.deepPurple,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xFFDFDFE4),
                       ),
                     ),
-
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xFF787993),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 2),
                 TextField(
                   obscureText: _ocultarSenha,
                   style: TextStyle(color: Colors.deepPurple, fontSize: 16.0),
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       _ocultarSenha = !_ocultarSenha;
                     });
                   },
-
-                  onChanged: (String value){
+                  onChanged: (String value) {
                     password = value;
                   },
-
                   controller: _senhaController,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _ocultarSenha ? Icons.remove_red_eye : Icons.security,
-                          color: Colors.deepPurple,
-                        ),
-                      ),
-                        hintText: "Senha",
-                        hintStyle: TextStyle(
-                            fontSize: 16,
-                          color: Colors.deepPurple,
-                            fontStyle: FontStyle.italic,
-                        ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color(0xFFDFDFE4),
-                        ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF787993),
-                        ),
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _ocultarSenha ? Icons.remove_red_eye : Icons.security,
+                        color: Colors.deepPurple,
                       ),
                     ),
+                    hintText: "Senha",
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      color: Colors.deepPurple,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xFFDFDFE4),
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xFF787993),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-            ),
-
-            Expanded(
-              flex: 1,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  FlatButton(onPressed: () async{
-
-                    if(_loginController.text.isEmpty || _senhaController.text.isEmpty){
-                      Get.snackbar("Falha ao realizar o login", 'Um ou mais campos estão em branco');
-                    }else{
-                      if(await RepositoryShared.verificar_login(_loginController.text, _senhaController.text)){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                    builder: (context) => Home()));
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: () async {
+                    if (_loginController.text.isEmpty ||
+                        _senhaController.text.isEmpty) {
+                      Get.snackbar("Falha ao realizar o login",
+                          'Um ou mais campos estão em branco');
+                    } else {
+                      if (await RepositoryShared.verificar_login(
+                          _loginController.text, _senhaController.text)) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Home()));
+                      } else {
+                        Get.snackbar("'Usuario e/ou senha incorretos",
+                            'Um ou mais dados informados estão incorretos');
+                        print('algo deu errado<TENTE NOVAMENTE>');
+                        //
+                      }
                     }
-                    else{
-                      Get.snackbar("'Usuario e/ou senha incorretos", 'Um ou mais dados informados estão incorretos');
-                      print('algo deu errado<TENTE NOVAMENTE>');
-                    //
-                    }
-                  }
-
                   },
-                    child: Text("Entrar", style: TextStyle(
-                    color: Color(0xFF7540EE),
-                    fontWeight: FontWeight.bold,
+                  child: Text(
+                    "Entrar",
+                    style: TextStyle(
+                      color: Color(0xFF7540EE),
+                      fontWeight: FontWeight.bold,
                       fontSize: 18,
-                  ),
-                      ),
-                  color: Color(0xFF7540EE).withOpacity(.2),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                  Text("Esqueceu sua Senha?", style: TextStyle(
-                    color: Color(0xFF7540EE),
-                    fontSize: 15,
-                    fontStyle: FontStyle.italic,
+                  color: Color(0xFF7540EE).withOpacity(.2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
                   ),
+                ),
+                new GestureDetector(
+                  onTap: () {
+                    print("esqueceu a senha");
+                  },
+                  child: Text(
+                    "Esqueceu sua Senha?",
+                    style: TextStyle(
+                      color: Color(0xFF7540EE),
+                      fontSize: 15,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Expanded(
-              flex: 1,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Ainda não tem sua conta? ", style:TextStyle(
-                    color: Color(0xFF787993),
-                    fontStyle: FontStyle.italic,
-                  )),
-                  Text("Criar uma! ", style:TextStyle(
-                    color: Color(0xFFFF7052),
-                    fontStyle: FontStyle.italic,
-                    fontSize: 18
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Ainda não tem sua conta? ",
+                    style: TextStyle(
+                      color: Color(0xFF787993),
+                      fontStyle: FontStyle.italic,
+                    )),
+                new GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Cadastro()));
+                  },
+                  child: Text(
+                    "Criar uma! ",
+                    style: TextStyle(
+                        color: Color(0xFFFF7052),
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18),
                   ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // class Login extends StatefulWidget {
 //
@@ -444,5 +441,3 @@ class _LoginState extends State<Login> {
 //     );
 //   }
 // }
-
-
